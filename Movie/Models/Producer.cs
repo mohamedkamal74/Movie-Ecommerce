@@ -10,6 +10,6 @@ namespace Movie.Models
         public string Profilepictureurl { get; set; }
         public string FullName { get; set; }
         public string Bio { get; set; }
-        public List<Movie> Movies { get; set; }
+        public List<Moviee> Movies { get; set; }
     }
 }
