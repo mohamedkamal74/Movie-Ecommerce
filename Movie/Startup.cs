@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Movie_Ecommerce.Data;
 
 namespace Movie
 {
@@ -58,6 +59,8 @@ namespace Movie
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            AppDbInitializer.Seed(app);
         }
     }
 }
