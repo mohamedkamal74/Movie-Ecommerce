@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.Data;
+using Movie.Models;
 using Movie_Ecommerce.Data.Services;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Movie_Ecommerce.Controllers
 {
@@ -21,6 +23,18 @@ namespace Movie_Ecommerce.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Actor actor)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.Add(actor);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(actor);
         }
     }
 }
