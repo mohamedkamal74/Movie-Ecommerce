@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Movie.Data;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace Movie_Ecommerce.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.Movies.ToList());
+            return View(_context.Movies.Include(c=>c.Cinema).ToList());
         }
     }
 }
