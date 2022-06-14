@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Movie.Models.Actor>
+
+@{
+    ViewData["Title"] = "List Of actors";
+}
+
+
+<div class="row col-md-8 offset-md-2">
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Profilepictureurl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bio)
+            </th>
+            <th> Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td class="align-middle">
+              <img src="@item.Profilepictureurl" class="rounded-circle" style="max-width:150px" alt="@item.FullName"/>
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bio)
+            </td class="align-middle">
+            <td class="align-middle">
+              
+               <a class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a> 
+               <a class="btn btn-outline-info"><i class="fa-solid fa-list"></i> Details</a> 
+               <a class="btn btn-danger"><i class="fa-solid fa-calendar-xmark"></i> Delete</a> 
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
