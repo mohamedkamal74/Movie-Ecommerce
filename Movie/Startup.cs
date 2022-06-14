@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Movie_Ecommerce.Data;
+using Movie_Ecommerce.Data.Services;
 
 namespace Movie
 {
@@ -31,6 +32,7 @@ namespace Movie
                 options.UseSqlServer(Configuration.GetConnectionString("movieconnection"));
             });
             services.AddControllersWithViews();
+            services.AddScoped<IActorsService,ActorsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.Data;
+using Movie_Ecommerce.Data.Services;
 using System.Linq;
 
 namespace Movie_Ecommerce.Controllers
 {
     public class ActorsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IActorsService _service;
 
-        public ActorsController(ApplicationDbContext context)
+        public ActorsController(IActorsService service)
         {
-            _context = context;
+            _service = service;
         }
         public IActionResult Index()
         {
-            return View(_context.Actors.ToList());
+            return View(_service.GetAll());
         }
     }
 }
