@@ -17,5 +17,10 @@ namespace Movie_Ecommerce.Controllers
         {
             return View(_service.GetAll());
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
