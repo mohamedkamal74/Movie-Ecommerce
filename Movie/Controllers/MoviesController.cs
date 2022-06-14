@@ -15,7 +15,7 @@ namespace Movie_Ecommerce.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.Movies.Include(c=>c.Cinema).ToList());
+            return View(_context.Movies.Include(c=>c.Cinema).OrderBy(n=>n.Name).ToList());
         }
     }
 }
