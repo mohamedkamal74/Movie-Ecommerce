@@ -31,10 +31,21 @@ namespace Movie_Ecommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Add(actor);
+               await _service.AddAsync(actor);
                 return RedirectToAction(nameof(Index));
             }
             return View(actor);
+        }
+
+        public async Task< IActionResult> Details(int id)
+        {
+            
+            var ActorDetails =await _service.GetByIdAsync(id);
+            if(ActorDetails == null)
+            {
+                return NotFound();
+            }
+            return View(ActorDetails);
         }
     }
 }

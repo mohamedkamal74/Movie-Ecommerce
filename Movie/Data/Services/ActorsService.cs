@@ -1,7 +1,9 @@
-﻿using Movie.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Movie.Data;
 using Movie.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Movie_Ecommerce.Data.Services
 {
@@ -14,10 +16,10 @@ namespace Movie_Ecommerce.Data.Services
         {
             _context = context;
         }
-        public void Add(Actor actor)
+        public async Task AddAsync(Actor actor)
         {
            _context.Actors.Add(actor);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -31,14 +33,17 @@ namespace Movie_Ecommerce.Data.Services
             return result;
         }
 
-        public Actor GetById(int id)
+        public async Task<Actor> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var result=await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            return result;
         }
 
         public void Update(int id, Actor NewActor)
         {
             throw new System.NotImplementedException();
         }
+
+       
     }
 }

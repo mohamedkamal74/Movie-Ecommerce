@@ -1,13 +1,14 @@
 ﻿using Movie.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Movie_Ecommerce.Data.Services
 {
     public interface IActorsService
     {
         IEnumerable<Actor> GetAll();
-        Actor GetById(int id);
-        void Add(Actor actor);
+       Task<Actor> GetByIdAsync(int id);
+        Task AddAsync(Actor actor);
         void Update(int id,Actor NewActor);
         void Delete(int id);    
     }
