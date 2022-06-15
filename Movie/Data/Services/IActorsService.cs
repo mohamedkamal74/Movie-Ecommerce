@@ -9,7 +9,7 @@ namespace Movie_Ecommerce.Data.Services
         IEnumerable<Actor> GetAll();
        Task<Actor> GetByIdAsync(int id);
         Task AddAsync(Actor actor);
-        Task UpdateAsync(int id,Actor NewActor);
-        void Delete(int id);    
+        Task<Actor> UpdateAsync(int id,Actor NewActor);
+        Task Delete(int id);    
     }
 }

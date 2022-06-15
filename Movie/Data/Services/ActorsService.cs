@@ -22,9 +22,13 @@ namespace Movie_Ecommerce.Data.Services
            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var result = await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.Actors.Remove(result);
+
+           await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Actor> GetAll()
@@ -39,11 +43,13 @@ namespace Movie_Ecommerce.Data.Services
             return result;
         }
 
-        public async Task UpdateAsync(int id, Actor NewActor)
+        public async Task<Actor> UpdateAsync(int id, Actor NewActor)
         {
-            var result= await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            
             _context.Actors.Update(NewActor);
            await _context.SaveChangesAsync();
+            return NewActor;
+
         }
 
        

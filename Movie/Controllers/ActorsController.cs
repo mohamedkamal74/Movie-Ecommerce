@@ -61,14 +61,38 @@ namespace Movie_Ecommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,Actor NewActor)
+        public async Task<IActionResult> Edit(int id,Actor actor)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateAsync(id,NewActor);
+                await _service.UpdateAsync(id,actor);
                 return RedirectToAction(nameof(Index));
             }
-            return View(NewActor);
+            return View(actor);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var ActorDetails = await _service.GetByIdAsync(id);
+            if (ActorDetails == null)
+            {
+                return NotFound();
+            }
+            return View(ActorDetails);
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+
+            var ActorDetails = await _service.GetByIdAsync(id);
+            if (ActorDetails == null)
+            {
+                return NotFound();
+            }
+            await _service.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
