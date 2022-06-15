@@ -39,9 +39,11 @@ namespace Movie_Ecommerce.Data.Services
             return result;
         }
 
-        public void Update(int id, Actor NewActor)
+        public async Task UpdateAsync(int id, Actor NewActor)
         {
-            throw new System.NotImplementedException();
+            var result= await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Actors.Update(NewActor);
+           await _context.SaveChangesAsync();
         }
 
        

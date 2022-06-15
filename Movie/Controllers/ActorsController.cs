@@ -47,5 +47,28 @@ namespace Movie_Ecommerce.Controllers
             }
             return View(ActorDetails);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+
+            var ActorDetails = await _service.GetByIdAsync(id);
+            if (ActorDetails == null)
+            {
+                return NotFound();
+            }
+            return View(ActorDetails);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id,Actor NewActor)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateAsync(id,NewActor);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(NewActor);
+        }
     }
 }
