@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Movie.Data;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,16 @@ namespace Movie_Ecommerce.Data.Base
         public async Task AddAsync(T entity)
         {
             _context.Set<T>().Add(entity);
-            await _context.SaveChangesAsync();
+        
         }
 
         public async Task Delete(int id)
         {
-            var result = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            EntityEntry entityEntry = _context.Entry<T>(entity);
+            entityEntry.State = EntityState.Deleted;
 
-            _context.Set<T>().Remove(result);
 
-            await _context.SaveChangesAsync();
         }
 
         public  IEnumerable<T> GetAll()
@@ -41,11 +42,11 @@ namespace Movie_Ecommerce.Data.Base
             return result;
         }
 
-        public async Task<T> UpdateAsync(int id, T entity)
+        public async Task UpdateAsync(int id, T entity)
         {
-            _context.Set<T>().Update(entity);
-            await _context.SaveChangesAsync();
-            return entity;
+           EntityEntry entityEntry = _context.Entry<T>(entity);
+            entityEntry.State = EntityState.Modified;
+           
         }
     }
 }
