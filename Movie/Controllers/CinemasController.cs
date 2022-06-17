@@ -83,17 +83,18 @@ namespace Movie_Ecommerce.Controllers
             return View(cinemaupdate);
         }
 
-        [HttpPost]
+        [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Cinema cinema)
+        public IActionResult DeleteConfirm(int id)
         {
-           if(cinema != null)
+            var cinemaupdate = _context.Cinemas.FirstOrDefault(x => x.Id == id);
+            if (cinemaupdate == null)
             {
-                _context.Cinemas.Remove(cinema);
-                _context.SaveChanges();
-                RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            return View(cinema);
+          _context.Cinemas.Remove(cinemaupdate);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
