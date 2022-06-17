@@ -1,36 +1,36 @@
-﻿@model Cinema
+﻿@model Producer
 
 @{
-    ViewData["Title"] = "Edit Cinema";
+    ViewData["Title"] = "Edit Producer";
 }
 
 <div class="row text">
     <div class="col-md-6 offset-md-3">
         <p>
-        <h4 class="text-info"> Edit Actor</h4>
+        <h4 class="text-info"> Edit Producer</h4>
         </p>
          <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
              <input type="hidden" asp-for="Id" />
             <div class="form-group text-center">
-                <img id="logoPreview" class="border-info rounded-circle" style="max-width:150px"/>
+                <img id="profilePreview" class="border-info rounded-circle" style="max-width:150px"/>
             </div>
 
             <div class="form-group">
-                <label asp-for="Logo" class="control-label"></label>
-                <input asp-for="Logo" class="form-control" />
-                <span asp-validation-for="Logo" class="text-danger"></span>
+                <label asp-for="Profilepictureurl" class="control-label"></label>
+                <input asp-for="Profilepictureurl" class="form-control" />
+                <span asp-validation-for="Profilepictureurl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Bio" class="control-label"></label>
+                <input asp-for="Bio" class="form-control" />
+                <span asp-validation-for="Bio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Edit" class="btn btn-outline-info float-right" />
@@ -44,11 +44,11 @@
 @section Scripts{
 <script>
     $(document).ready(function (){
-         var output=document.getElementById('logoPreview');
+         var output=document.getElementById('profilePreview');
         output.src=$('#Profilepictureurl').val();
     })
     $('#Profilepictureurl').on("change",function(){
-        var output=document.getElementById('logoPreview');
+        var output=document.getElementById('profilePreview');
         output.src=$(this).val();
     })
 
