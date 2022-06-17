@@ -1,0 +1,58 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Edit Cinema";
+}
+
+<div class="row text">
+    <div class="col-md-6 offset-md-3">
+        <p>
+        <h4 class="text-info"> Edit Actor</h4>
+        </p>
+         <hr />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input type="hidden" asp-for="Id" />
+            <div class="form-group text-center">
+                <img id="logoPreview" class="border-info rounded-circle" style="max-width:150px"/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Logo" class="control-label"></label>
+                <input asp-for="Logo" class="form-control" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-outline-info float-right" />
+                <a asp-action="Index" class="btn btn btn-outline-secondary">Show All</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+<script>
+    $(document).ready(function (){
+         var output=document.getElementById('logoPreview');
+        output.src=$('#Logo').val();
+    })
+    $('#Profilepictureurl').on("change",function(){
+        var output=document.getElementById('logoPreview');
+        output.src=$(this).val();
+    })
+
+</script>
+}
+
+
