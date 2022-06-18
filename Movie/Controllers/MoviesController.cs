@@ -47,8 +47,16 @@ namespace Movie_Ecommerce.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var movieDetail = await _context.Movies.FirstOrDefaultAsync(x => x.Id == id);
-            return View(movieDetail);
+            var movieDetails = await _context.Movies
+                             .Include(c => c.Cinema)
+                             .Include(p => p.Producer)
+                             .Include(am => am.Actors_Movies).ThenInclude(a => a.Actor)
+                             .FirstOrDefaultAsync(n => n.Id == id);
+            if (movieDetails == null)
+            {
+                return NotFound();
+            }
+            return View(movieDetails);
         }
 
         //GET: Movies/Create
@@ -64,6 +72,7 @@ namespace Movie_Ecommerce.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewMovieVM movie)
         {
             if (ModelState.IsValid)
@@ -82,6 +91,7 @@ namespace Movie_Ecommerce.Controllers
                 };
 
                 await _context.Movies.AddAsync(newMovie);
+                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Actors = await _context.Actors.OrderBy(n => n.FullName).ToListAsync();
