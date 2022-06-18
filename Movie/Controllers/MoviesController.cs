@@ -147,7 +147,11 @@ namespace Movie_Ecommerce.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbMovie = await _context.Movies.FirstOrDefaultAsync(n => n.Id == movie.Id);
+                var dbMovie = await _context.Movies
+                 .Include(c => c.Cinema)
+                 .Include(p => p.Producer)
+                 .Include(am => am.Actors_Movies).ThenInclude(a => a.Actor)
+                 .FirstOrDefaultAsync(n => n.Id == id);
 
                 if (dbMovie != null)
                 {
@@ -163,9 +167,14 @@ namespace Movie_Ecommerce.Controllers
                 }
                 _context.Movies.Update(dbMovie);
                 await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
 
 
             }
+
+            ViewBag.Cinemas = new SelectList(_context.Cinemas.ToList(), "Id", "Name");
+            ViewBag.Producers = new SelectList(_context.Producers.ToList(), "Id", "FullName");
+            ViewBag.Actors = new SelectList(_context.Actors.ToList(), "Id", "FullName");
             return View(movie);
         }
 
