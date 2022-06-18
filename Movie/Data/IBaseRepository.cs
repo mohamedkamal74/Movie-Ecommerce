@@ -1,15 +1,20 @@
 ﻿using Movie_Ecommerce.Data.Base;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Movie_Ecommerce.Data
 {
-    public interface IBaseRepository<T>where T : class,IEntityBase,new()
+    public interface IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
-        IEnumerable<T> GetAll();
-       Task <T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties);
+        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includeProperties);
         Task AddAsync(T entity);
         Task UpdateAsync(int id, T entity);
-        Task Delete(int id);
+        Task DeleteAsync(int id);
     }
+}
 }
