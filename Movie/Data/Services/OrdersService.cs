@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Movie.Data;
 using Movie.Models;
 
-namespace eTickets.Data.Services
+namespace Movie_Ecommerce.Data.Services
 {
     public class OrdersService : IOrdersService
     {

@@ -10,7 +10,7 @@ using Movie.Models;
 using Movie.Data;
 using Movie_Ecommerce.ViewModels;
 
-namespace eTickets.Data.Services
+namespace Movie_Ecommerce.Data.Services
 {
     public class MoviesService : BaseRepository<Moviee>, IMoviesService
     {

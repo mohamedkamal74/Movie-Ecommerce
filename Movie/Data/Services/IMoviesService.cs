@@ -6,11 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Movie_Ecommerce.Data;
-using Movie.Models;
 using Movie_Ecommerce.Data.ViewModels;
+using Movie.Models;
 
-
-namespace eTickets.Data.Services
+namespace Movie_Ecommerce.Data.Services
 {
     public interface IMoviesService:IBaseRepository<Moviee>
     {

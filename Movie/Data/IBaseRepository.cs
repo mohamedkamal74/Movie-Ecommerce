@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Movie_Ecommerce.Data
 {
-    public interface IEntityBaseRepository<T> where T : class, IEntityBase, new()
+    public interface IBaseRepository<T> where T : class, IEntityBase, new()
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties);
@@ -17,4 +17,4 @@ namespace Movie_Ecommerce.Data
         Task DeleteAsync(int id);
     }
 }
-}
+

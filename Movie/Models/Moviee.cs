@@ -1,4 +1,5 @@
 ﻿using Movie.Data;
+using Movie_Ecommerce.Data.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Movie.Models
 {
-    public class Moviee
+    public class Moviee:IEntityBase
     {
         [Key]
         public int Id { get; set; }
