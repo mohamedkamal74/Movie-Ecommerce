@@ -113,10 +113,26 @@ namespace Movie_Ecommerce.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Actors = await _context.Actors.OrderBy(n => n.FullName).ToListAsync();
-            ViewBag.Cinemas = await _context.Cinemas.OrderBy(n => n.Name).ToListAsync();
-            ViewBag.Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync();
-            return View(movieDetails);
+            var response = new NewMovieVM()
+            {
+                Id = movieDetails.Id,
+                Name = movieDetails.Name,
+                Description = movieDetails.Description,
+                Price = movieDetails.Price,
+                StartDate = movieDetails.StartDate,
+                EndDate = movieDetails.EndDate,
+                ImageURL = movieDetails.ImageUrl,
+                MovieCategory = movieDetails.MovieCategory,
+                CinemaId = movieDetails.CinemaId,
+                ProducerId = movieDetails.ProducerId,
+                ActorIds = movieDetails.Actors_Movies.Select(n => n.ActorId).ToList(),
+            };
+
+
+            ViewBag.Cinemas = new SelectList(_context.Cinemas.ToList(), "Id", "Name");
+            ViewBag.Producers = new SelectList(_context.Producers.ToList(), "Id", "FullName");
+            ViewBag.Actors = new SelectList(_context.Actors.ToList(), "Id", "FullName");
+            return View(response);
         }
 
         [HttpPost]
