@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace eTickets.Controllers
+namespace Movie.Controllers
 {
    // [Authorize] 
     public class OrdersController : Controller

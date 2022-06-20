@@ -12,6 +12,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Movie_Ecommerce.Data;
 using Movie_Ecommerce.Data.Services;
+using Microsoft.AspNetCore.Http;
+using Movie_Ecommerce.Data.Cart;
+using Movie_Ecommerce.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Movie
 {
@@ -31,8 +36,28 @@ namespace Movie
             {
                 options.UseSqlServer(Configuration.GetConnectionString("movieconnection"));
             });
+
+
+
+
             services.AddControllersWithViews();
-            services.AddScoped<IActorsService,ActorsService>();
+            services.AddScoped<IActorsService, ActorsService>();
+           // services.AddScoped<IProducersService, ProducersService>();
+           // services.AddScoped<ICinemasService, CinemasService>();
+            services.AddScoped<IMoviesService, MoviesService>();
+            services.AddScoped<IOrdersService, OrdersService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            //Authentication and authorization
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +77,7 @@ namespace Movie
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
@@ -63,6 +89,8 @@ namespace Movie
             });
 
             AppDbInitializer.Seed(app);
+            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
+
         }
     }
 }
