@@ -1,6 +1,4 @@
-﻿
-
-using Movie.Models;
+﻿using Movie.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

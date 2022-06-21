@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-8 offset-2">
         <p>
-            <h4>List of all your orders</h4>
+            <h4 class="text-info">List of all your orders</h4>
         </p>
 
         <table class="table">
@@ -44,11 +44,9 @@
                     </td>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                            @if(order.OrderItems != null)
-                            {
+                            
                             <td class="align-middle"> @order.User.FullName </td>     
-                            }
-                            <td>you dont have orders yet</td>
+                           
                     }
                     </tr>
                 }
