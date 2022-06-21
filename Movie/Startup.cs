@@ -79,6 +79,9 @@ namespace Movie
             app.UseRouting();
             app.UseSession();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -44,7 +44,11 @@
                     </td>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <td class="align-middle"> @order.User.FullName </td>
+                            @if(order.OrderItems != null)
+                            {
+                            <td class="align-middle"> @order.User.FullName </td>     
+                            }
+                            <td>you dont have orders yet</td>
                     }
                     </tr>
                 }
