@@ -20,7 +20,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Bio)
             </th>
+             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
             <th> Actions</th>
+                                    }
         </tr>
     </thead>
     <tbody>
@@ -38,10 +41,12 @@
             </td class="align-middle">
             <td class="align-middle">
               
+                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
                <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i> Edit</a> 
                <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-list"></i> Details</a> 
                <a class="btn btn-danger text-white btn-sm" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-calendar-xmark"></i> Delete</a> 
-
+                                    }
             </td>
         </tr>
 }
